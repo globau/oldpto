@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+
+  pto:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    depends_on:
+      - ldap
+      - mysql
+    volumes:
+      - "./:/app"
+    ports:
+      - "8000:8000"
+
+  ldap:
+    image: osixia/openldap:1.5.0
+    hostname: ldap
+    environment:
+      - LDAP_DOMAIN=mozilla
+      - LDAP_ORGANISATION=Mozilla
+      - LDAP_ADMIN_PASSWORD=secret
+      - LDAP_TLS=true
+      - LDAP_TLS_VERIFY_CLIENT=never
+      - LDAP_REMOVE_CONFIG_AFTER_SETUP=false
+    restart: always
+    command: "--copy-service -l warning"
+    volumes:
+      - "./docker/ldap:/container/service/slapd/assets/config/bootstrap/ldif/custom"
+
+  mysql:
+    image: mysql:5.7
+    hostname: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=pto
+      - MYSQL_USER=pto
+      - MYSQL_PASSWORD=secret

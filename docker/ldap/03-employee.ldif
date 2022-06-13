@@ -1,0 +1,10 @@
+dn: mail=employee@mozilla.com,o=com,dc=mozilla
+cn: Employee Test
+employeenumber: E101251
+givenname: Employee
+mail: employee@mozilla.com
+manager: mail=manager@mozilla.com,o=com,dc=mozilla
+objectclass: inetOrgPerson
+objectclass: mozComPerson
+primaryofficecountry: AU
+sn: Test
