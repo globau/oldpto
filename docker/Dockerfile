@@ -5,7 +5,8 @@ FROM php:5.6-fpm-alpine
 RUN apk update && \
     apk upgrade && \
     apk add nginx supervisor openldap-dev mysql-client
-RUN docker-php-ext-install ldap mysql
+RUN docker-php-ext-install ldap mysql && \
+    pear install --alldeps Mail
 
 RUN addgroup -g 10001 app && \
     adduser -D -u 10001 -G app app
