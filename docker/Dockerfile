@@ -13,7 +13,7 @@ RUN addgroup -g 10001 app && \
 
 # configure php, nginx, supervisord, etc
 RUN rm /usr/local/etc/php-fpm.d/*
-COPY docker/php-include-path.ini /usr/local/etc/php/conf.d
+COPY docker/php-pto.ini /usr/local/etc/php/conf.d
 COPY docker/php-fpm.ini /usr/local/etc/php-fpm.d/www.conf
 COPY docker/nginx.conf /etc/nginx/nginx.conf
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
